@@ -16,7 +16,8 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Builder
-@Entity
+@Entity(name = "Task")
+@Table(name ="task")
 @EntityListeners(AuditingEntityListener.class)
 public class Task {
     @Id
@@ -25,6 +26,7 @@ public class Task {
     private String title;
     @NonNull
     private String description;
+    @Enumerated(EnumType.STRING)
     private TaskStatus status;
     @CreatedDate
     private Timestamp createdAt;

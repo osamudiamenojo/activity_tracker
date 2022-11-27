@@ -1,18 +1,29 @@
 package dev.decagon.activity_tracker.service;
 
+import dev.decagon.activity_tracker.dto.StudentDto;
 import dev.decagon.activity_tracker.dto.TaskCreationDto;
 import dev.decagon.activity_tracker.dto.TaskDto;
+import dev.decagon.activity_tracker.dto.TaskUpdateDto;
 import dev.decagon.activity_tracker.entities.Task;
-import dev.decagon.activity_tracker.util.TaskDtoMapper;
+import dev.decagon.activity_tracker.enums.TaskStatus;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TaskService {
-    TaskDto createTask(TaskCreationDto taskDto, Long UserId);
-    Task  updateTask(Long userId, Task task);
-    Optional<Task> findTaskById(Long id);
-    List<Task> findAllByUserId(Long UserId);
-    List<Task> getAllPendingTask(Long UserId);
-    List<Task> getAllDoneTask(Long UserId);
+    TaskDto createTask(TaskCreationDto taskDto);
+    TaskDto  updateTask( TaskUpdateDto taskUpdateRequest, Long taskId);
+
+    Task getTask(Long id);
+    TaskDto getTaskDto(Long id);
+    List<TaskDto> findAllByUserId(Long UserId);
+     List<TaskDto> getTasksByStatus(TaskStatus status, Long studentId);
+    TaskDto resetStatus(TaskStatus status, Long taskId);
+//    List<TaskDto> getAllDoneTask(Long UserId);
+//    List<TaskDto> getAllInProgressTask(Long userId);
+
+//    TaskDto setInProgress(Long taskId);
+//    TaskDto setDone(Long taskId);
+
+    void delete(Long taskId);
+
 }
