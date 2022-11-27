@@ -4,6 +4,7 @@ import dev.decagon.activity_tracker.dto.TaskCreationDto;
 import dev.decagon.activity_tracker.dto.TaskDto;
 import dev.decagon.activity_tracker.entities.Student;
 import dev.decagon.activity_tracker.entities.Task;
+import dev.decagon.activity_tracker.enums.TaskStatus;
 import dev.decagon.activity_tracker.exception.BadRequestException;
 import dev.decagon.activity_tracker.repositories.StudentRepository;
 import dev.decagon.activity_tracker.repositories.TaskRepository;
@@ -21,17 +22,17 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final StudentRepository studentRepository;
     Service studentService;
-    UserRe
 
     @Override
     public TaskDto createTask(TaskCreationDto taskCreationDto, Long studentId) {
-            Task task = new Task();
-            Optional<Student> studentOptional = studentRepository.findById(studentId);
-            task.setTitle(taskCreationDto.getTitle());
-            task.setDescription(taskCreationDto.getDescription());
-            task.setStudent(studentRepository.findById(studentId).orElseThrow(()->new BadRequestException("student not available")));
-            return TaskDtoMapper.taskToTaskDto(task);
-
+        return TaskDtoMapper.taskToTaskDto(taskRepository.save(
+                Task.builder()
+                        .title(taskCreationDto.getTitle())
+                        .description(taskCreationDto.getDescription())
+                        .status(TaskStatus.PENDING)
+                        .student(studentRepository.findById(studentId).orElseThrow(()->new BadRequestException("student not available")))
+                        .build()
+        ));
     }
 
     @Override
