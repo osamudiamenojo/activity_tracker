@@ -3,7 +3,6 @@ package dev.decagon.activity_tracker.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.decagon.activity_tracker.dto.TaskDto;
 import dev.decagon.activity_tracker.enums.TaskStatus;
-import dev.decagon.activity_tracker.service.TaskService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

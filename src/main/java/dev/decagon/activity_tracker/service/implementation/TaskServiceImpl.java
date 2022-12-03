@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @AllArgsConstructor
 @Service
 public class TaskServiceImpl implements TaskService {
+
     private final TaskRepository taskRepository;
     private final StudentRepository studentRepository;
 
@@ -37,7 +37,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDto updateTask( TaskUpdateDto taskUpdateRequest, Long taskId) {
+    public TaskDto updateTask(TaskUpdateDto taskUpdateRequest, Long taskId) {
         Task task = getTask(taskId);
         task.setTitle(taskUpdateRequest.getTitle());
         task.setDescription(taskUpdateRequest.getDescription());
@@ -62,7 +62,7 @@ public class TaskServiceImpl implements TaskService {
 
         return taskRepository.findTasksByStudent_Id(studentId)
                 .stream().map(Mapper::taskToTaskDto)
-                        .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     @Override

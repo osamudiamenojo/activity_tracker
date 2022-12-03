@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/tasks")
 public class TaskController {
 
-    private  TaskService taskService;
+    private TaskService taskService;
 
     @PostMapping("/create-task")
     public ResponseEntity<TaskDto> create(@Valid @RequestBody TaskCreationDto taskCreationRequest){
